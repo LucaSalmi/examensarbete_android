@@ -12,6 +12,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.login_app_exarbete.Routes
+import com.example.login_app_exarbete.widgets.AppPasswordField
 import com.example.login_app_exarbete.widgets.AppTextField
 import com.example.login_app_exarbete.widgets.CustomTopAppBar
 
@@ -25,7 +26,7 @@ fun LoginScreen(navController: NavHostController){
             Spacer(modifier = Modifier.height(150.dp))
             AppTextField("E-mail")
             Spacer(modifier = Modifier.height(25.dp))
-            AppTextField("Password")
+            AppPasswordField("Password")
             Spacer(modifier = Modifier.height(25.dp))
             Box(modifier = Modifier.padding(horizontal = 20.dp)) {
                 Button(

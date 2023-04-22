@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.login_app_exarbete'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.login_app_exarbete"
@@ -61,4 +61,5 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
     implementation "androidx.navigation:navigation-compose:2.4.0-alpha04"
+    implementation "androidx.compose.material:material-icons-extended:1.3.1"
 }
