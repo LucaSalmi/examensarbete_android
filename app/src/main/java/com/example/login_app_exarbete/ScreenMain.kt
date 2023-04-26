@@ -12,8 +12,8 @@ import com.example.login_app_exarbete.views.RegisterScreen
 @Composable
 fun ScreenMain(){
     val navController = rememberNavController()
-    val viewModel: AuthModel = viewModel()
-    val hasUser = viewModel.getUser() != null
+    val authModel: AuthModel = viewModel()
+    val hasUser = authModel.getUser() != null
     NavHost(navController = navController, startDestination = getStartDestination(hasUser)){
         composable(Routes.Login.route){
             LoginScreen(navController)
