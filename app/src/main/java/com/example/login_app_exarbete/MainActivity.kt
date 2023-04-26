@@ -19,6 +19,7 @@ import com.example.login_app_exarbete.ui.theme.Login_app_exArbeteTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             Login_app_exArbeteTheme {

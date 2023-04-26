@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "152968103834",
+    "project_id": "examensarbete-app-aaedb",
+    "storage_bucket": "examensarbete-app-aaedb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152968103834:android:c14cd24791570ab1e59c23",
+        "android_client_info": {
+          "package_name": "com.example.login_app_exarbete"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152968103834-urg0krnlqigdlgqrsh56qk5cl9t8dndo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjDzTlsY0Cn6N4i_C7LhBRqwVJ6BfOw2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152968103834-urg0krnlqigdlgqrsh56qk5cl9t8dndo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "152968103834-3gm91kgdjlne0l2ajgumqsm5vlvnn70a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.loginExArbete"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152968103834:android:0a20a270ae42ad47e59c23",
+        "android_client_info": {
+          "package_name": "com.example.login_ex_arbete"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152968103834-urg0krnlqigdlgqrsh56qk5cl9t8dndo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjDzTlsY0Cn6N4i_C7LhBRqwVJ6BfOw2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152968103834-urg0krnlqigdlgqrsh56qk5cl9t8dndo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "152968103834-3gm91kgdjlne0l2ajgumqsm5vlvnn70a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.loginExArbete"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

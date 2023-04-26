@@ -1,5 +1,6 @@
 package com.example.login_app_exarbete.widgets
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,33 +16,38 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.login_app_exarbete.views.TextFieldState
+
 
 @Composable
-fun AppTextField(label: String){
-    var text by remember { mutableStateOf(TextFieldValue("")) }
-    HorizontalCenteredRow(modifier = Modifier.fillMaxWidth()){
+fun AppTextField(label: String, value: String, onInputChanged: (String) -> Unit) {
+
+    HorizontalCenteredRow(modifier = Modifier.fillMaxWidth()) {
         OutlinedTextField(
             shape = RoundedCornerShape(percent = 20),
-            value = text,
-            onValueChange = {text = it},
+            value = value,
+            onValueChange = onInputChanged,
             label = { Text(text = label) },
-            modifier = Modifier.weight(1F).padding(horizontal = 20.dp),
+            modifier = Modifier
+                .weight(1F)
+                .padding(horizontal = 20.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         )
     }
 }
 
 @Composable
-fun AppPasswordField(label: String){
-    var text by remember { mutableStateOf(TextFieldValue("")) }
+fun AppPasswordField(label: String, value: String, onInputChanged: (String) -> Unit) {
     var showPassword by remember { mutableStateOf(value = false) }
-    HorizontalCenteredRow(modifier = Modifier.fillMaxWidth()){
+    HorizontalCenteredRow(modifier = Modifier.fillMaxWidth()) {
         OutlinedTextField(
             shape = RoundedCornerShape(percent = 20),
-            value = text,
-            onValueChange = {text = it},
+            value = value,
+            onValueChange = onInputChanged,
             label = { Text(text = label) },
-            modifier = Modifier.weight(1F).padding(horizontal = 20.dp),
+            modifier = Modifier
+                .weight(1F)
+                .padding(horizontal = 20.dp),
             visualTransformation = if (showPassword) {
 
                 VisualTransformation.None
