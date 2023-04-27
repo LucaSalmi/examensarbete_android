@@ -1,5 +1,6 @@
 package com.example.login_app_exarbete.views
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,18 +12,23 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.login_app_exarbete.widgets.CustomTopAppBar
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomePage(navController: NavHostController){
+fun HomePage(navController: NavHostController) {
     Scaffold(
         topBar = {
             CustomTopAppBar(
                 navController = navController,
                 title = "Home Page",
-                showBackIcon = true
+                showBackIcon = false
             )
         }
     ) {
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
             Text(text = "Welcome!")
         }
     }

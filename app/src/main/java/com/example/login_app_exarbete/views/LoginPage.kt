@@ -23,8 +23,8 @@ import com.example.login_app_exarbete.widgets.DialogBoxLoading
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(navController: NavHostController) {
-    val viewModel: AuthModel = viewModel()
-    val openDialog by viewModel.open.observeAsState(false)
+    val authModel: AuthModel = viewModel()
+    val openDialog by authModel.open.observeAsState(false)
     val context = LocalContext.current
     var mail by rememberSaveable { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -53,8 +53,8 @@ fun LoginScreen(navController: NavHostController) {
             Box(modifier = Modifier.padding(horizontal = 20.dp)) {
                 Button(
                     onClick = {
-                        viewModel.open.value = true
-                        viewModel.loginUser(mail, password, context, navController)
+                        authModel.open.value = true
+                        authModel.loginUser(mail, password, context, navController)
                     },
                     shape = RoundedCornerShape(50.dp),
                     modifier = Modifier
