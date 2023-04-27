@@ -7,6 +7,6 @@ data class UserPost(
     val body: String,
     val userName: String,
     val id: String,
-    val createdAt: Date,
+    val createdAt: String,
 
     )

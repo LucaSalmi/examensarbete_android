@@ -8,6 +8,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -54,17 +55,21 @@ fun UserPostcard(item: UserPost) {
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth()
-                    .align(Alignment.CenterVertically)
+                    .align(Alignment.Bottom)
             ) {
-                Row(horizontalArrangement = Arrangement.Center) {
+                Row() {
                     ImageLoader(imageLink = imageLink)
-                    Text(text = item.title, style = typography.h6)
-                    Text(text = item.body, style = typography.caption)
+                    Spacer(modifier = Modifier.fillMaxWidth(0.5F))
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                    ) {
+                        Text(text = item.title, style = typography.h6)
+                        Text(text = item.body, style = typography.caption)
+                    }
                 }
                 Text(text = item.userName)
-                Text(text = item.createdAt.toString())
-
-
+                Text(text = item.createdAt)
             }
         }
     }
@@ -74,17 +79,16 @@ fun UserPostcard(item: UserPost) {
 fun ImageLoader(imageLink: String) {
     val context = LocalContext.current
     SubcomposeAsyncImage(
-        model = ImageRequest.Builder(context)
-            .data(imageLink)
-            .crossfade(true).transformations(
-                CircleCropTransformation()
-            )
-            .build(),
+        model = ImageRequest.Builder(context).data(imageLink).crossfade(true).transformations(
+            CircleCropTransformation()
+        ).build(),
         contentDescription = null,
         loading = {
             ImageLoadingAnimation()
         },
-        modifier = Modifier.height(70.dp).width(70.dp),
+        modifier = Modifier
+            .height(70.dp)
+            .width(70.dp),
     )
 }
 
