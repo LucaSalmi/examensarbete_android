@@ -1,20 +1,31 @@
 package com.example.login_app_exarbete.views
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.login_app_exarbete.models.UserPost
 import com.example.login_app_exarbete.widgets.CustomTopAppBar
+import com.example.login_app_exarbete.widgets.UserPostcard
+import java.util.Date
+import androidx.compose.foundation.lazy.items
+import java.time.Instant
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomePage(navController: NavHostController) {
+    val posts = remember {
+        mutableListOf(UserPost(
+            title = "Title", body = "Body", userName = "UserName", id = "123456", createdAt = Date.from(
+            Instant.now())))
+    }
     Scaffold(
         topBar = {
             CustomTopAppBar(
@@ -24,12 +35,18 @@ fun HomePage(navController: NavHostController) {
             )
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+
+        LazyColumn(
+            contentPadding = PaddingValues(
+                horizontal = 16.dp,
+                vertical = 6.dp,
+            )
         ) {
-            Text(text = "Welcome!")
+            items(
+                items = posts
+            ) {
+                UserPostcard(item = it)
+            }
         }
     }
 }
