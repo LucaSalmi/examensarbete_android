@@ -2,17 +2,11 @@ package com.example.login_app_exarbete.views
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -25,7 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.login_app_exarbete.AuthModel
+import com.example.login_app_exarbete.view_models.AuthViewModel
 import com.example.login_app_exarbete.widgets.AppButton
 import com.example.login_app_exarbete.widgets.AppPasswordField
 import com.example.login_app_exarbete.widgets.AppTextField
@@ -35,8 +29,8 @@ import com.example.login_app_exarbete.widgets.DialogBoxLoading
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun RegisterScreen(navController: NavHostController) {
-    val authModel: AuthModel = viewModel()
-    val openDialog by authModel.open.observeAsState(false)
+    val authViewModel: AuthViewModel = viewModel()
+    val openDialog by authViewModel.open.observeAsState(false)
     val context = LocalContext.current
     var mail by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -59,8 +53,8 @@ fun RegisterScreen(navController: NavHostController) {
                 value = password,
                 onInputChanged = { password = it })
             AppButton("Register") {
-                authModel.open.value = true
-                authModel.registerUser(mail, password, context, navController)
+                authViewModel.open.value = true
+                authViewModel.registerUser(mail, password, context, navController)
             }
             if (openDialog) {
                 DialogBoxLoading()

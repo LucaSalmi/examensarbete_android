@@ -5,7 +5,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.login_app_exarbete.views.CreatePostList
+import com.example.login_app_exarbete.router.Routes
+import com.example.login_app_exarbete.view_models.AuthViewModel
 import com.example.login_app_exarbete.views.CreatePostPage
 import com.example.login_app_exarbete.views.HomePage
 import com.example.login_app_exarbete.views.LoginScreen
@@ -14,8 +15,8 @@ import com.example.login_app_exarbete.views.RegisterScreen
 @Composable
 fun ScreenMain(){
     val navController = rememberNavController()
-    val authModel: AuthModel = viewModel()
-    val hasUser = authModel.getUser() != null
+    val authViewModel: AuthViewModel = viewModel()
+    val hasUser = authViewModel.getUser() != null
     NavHost(navController = navController, startDestination = getStartDestination(hasUser)){
         composable(Routes.Login.route){
             LoginScreen(navController)

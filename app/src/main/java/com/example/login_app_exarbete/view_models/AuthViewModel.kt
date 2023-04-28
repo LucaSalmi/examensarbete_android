@@ -1,4 +1,4 @@
-package com.example.login_app_exarbete
+package com.example.login_app_exarbete.view_models
 
 import android.content.Context
 import android.widget.Toast
@@ -6,15 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import com.example.login_app_exarbete.router.Routes
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AuthModel : ViewModel() {
+class AuthViewModel : ViewModel() {
     // Dialog box
     var open = MutableLiveData<Boolean>()
     private val auth = Firebase.auth

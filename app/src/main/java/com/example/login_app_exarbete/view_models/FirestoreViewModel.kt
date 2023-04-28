@@ -1,4 +1,4 @@
-package com.example.login_app_exarbete
+package com.example.login_app_exarbete.view_models
 
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -41,7 +41,7 @@ class FirestoreViewModel : ViewModel() {
                 val docRef = db.collection(DatabaseConstants.POSTS)
                 val newId = docRef.document().id
                 val doc = newPost.toJson(newId)
-                docRef.document(newId).set(doc).addOnCompleteListener {task ->
+                docRef.document(newId).set(doc).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Saving success, pop back to home page
                         navController.popBackStack()
@@ -74,6 +74,12 @@ class FirestoreViewModel : ViewModel() {
                 postList.value = UserPost.fromJson(snapshot.documents)
             }
         }
+    }
+
+    fun loadMoreItems() {
+        val extraItemsList = mutableListOf<UserPost>()
+        repeat(2) { postList.value?.let { extraItemsList.addAll(it) } }
+        postList.value = extraItemsList
     }
 
 

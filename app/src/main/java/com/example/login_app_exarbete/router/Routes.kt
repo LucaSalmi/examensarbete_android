@@ -1,4 +1,4 @@
-package com.example.login_app_exarbete
+package com.example.login_app_exarbete.router
 
 sealed class Routes(val route: String){
     object Login: Routes("Login")

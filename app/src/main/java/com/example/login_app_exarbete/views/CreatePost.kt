@@ -3,7 +3,6 @@ package com.example.login_app_exarbete.views
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -24,8 +23,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.login_app_exarbete.AuthModel
-import com.example.login_app_exarbete.FirestoreViewModel
+import com.example.login_app_exarbete.view_models.AuthViewModel
+import com.example.login_app_exarbete.view_models.FirestoreViewModel
 import com.example.login_app_exarbete.models.UserPost
 import com.example.login_app_exarbete.widgets.AppButton
 import com.example.login_app_exarbete.widgets.AppTextField
@@ -39,7 +38,7 @@ import java.time.LocalDateTime
 @Composable
 fun CreatePostPage(navController: NavHostController) {
     val firestoreViewModel: FirestoreViewModel = viewModel()
-    val authModel: AuthModel = viewModel()
+    val authViewModel: AuthViewModel = viewModel()
     val context = LocalContext.current
     var newPost by remember {
         mutableStateOf(UserPost("", "", "", "", ""))
@@ -78,7 +77,7 @@ fun CreatePostPage(navController: NavHostController) {
                 AppButton("Publish Post") {
                     firestoreViewModel.open.value = true
                     newPost = newPost.copy(
-                        userName = authModel.getUser()?.email ?: "Anonymous",
+                        userName = authViewModel.getUser()?.email ?: "Anonymous",
                         createdAt = LocalDateTime.now().toString(),
                     )
                     firestoreViewModel.savePostToFirestore(newPost, context, navController)
