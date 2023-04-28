@@ -5,6 +5,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.login_app_exarbete.views.CreatePostList
+import com.example.login_app_exarbete.views.CreatePostPage
 import com.example.login_app_exarbete.views.HomePage
 import com.example.login_app_exarbete.views.LoginScreen
 import com.example.login_app_exarbete.views.RegisterScreen
@@ -23,6 +25,9 @@ fun ScreenMain(){
         }
         composable(Routes.HomePage.route){
             HomePage(navController)
+        }
+        composable(Routes.CreatePost.route){
+            CreatePostPage(navController)
         }
     }
 }

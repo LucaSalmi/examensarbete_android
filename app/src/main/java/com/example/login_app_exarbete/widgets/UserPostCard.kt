@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
@@ -59,17 +60,19 @@ fun UserPostcard(item: UserPost) {
             ) {
                 Row() {
                     ImageLoader(imageLink = imageLink)
-                    Spacer(modifier = Modifier.fillMaxWidth(0.5F))
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                        Modifier.padding(horizontal = 12.dp),
                         verticalArrangement = Arrangement.Center,
                     ) {
-                        Text(text = item.title, style = typography.h6)
-                        Text(text = item.body, style = typography.caption)
+                        Text(text = item.title, fontSize = 16.sp)
+                        Text(text = item.body, fontSize = 12.sp)
                     }
                 }
-                Text(text = item.userName)
-                Text(text = item.createdAt)
+                Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
+                    Text(text = item.userName, fontSize = 8.sp)
+                    Text(text = item.createdAt, fontSize = 8.sp)
+                }
+
             }
         }
     }
@@ -87,8 +90,8 @@ fun ImageLoader(imageLink: String) {
             ImageLoadingAnimation()
         },
         modifier = Modifier
-            .height(70.dp)
-            .width(70.dp),
+            .height(40.dp)
+            .width(40.dp),
     )
 }
 
