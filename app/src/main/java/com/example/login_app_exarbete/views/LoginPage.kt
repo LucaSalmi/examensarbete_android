@@ -15,6 +15,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.login_app_exarbete.AuthModel
 import com.example.login_app_exarbete.Routes
+import com.example.login_app_exarbete.widgets.AppButton
 import com.example.login_app_exarbete.widgets.AppPasswordField
 import com.example.login_app_exarbete.widgets.AppTextField
 import com.example.login_app_exarbete.widgets.CustomTopAppBar
@@ -26,7 +27,7 @@ fun LoginScreen(navController: NavHostController) {
     val authModel: AuthModel = viewModel()
     val openDialog by authModel.open.observeAsState(false)
     val context = LocalContext.current
-    var mail by rememberSaveable { mutableStateOf("") }
+    var mail by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Scaffold(topBar = {
@@ -44,25 +45,14 @@ fun LoginScreen(navController: NavHostController) {
                 label = "Password",
                 value = password,
                 onInputChanged = { password = it })
-            Spacer(modifier = Modifier.height(25.dp))
             TextButton(onClick = {
                 navController.navigate(Routes.Register.route)
             }) {
                 Text("Register Here")
             }
-            Box(modifier = Modifier.padding(horizontal = 20.dp)) {
-                Button(
-                    onClick = {
-                        authModel.open.value = true
-                        authModel.loginUser(mail, password, context, navController)
-                    },
-                    shape = RoundedCornerShape(50.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
-                ) {
-                    Text(text = "Login")
-                }
+            AppButton("Login")  {
+                authModel.open.value = true
+                authModel.loginUser(mail, password, context, navController)
             }
             if (openDialog) {
                 DialogBoxLoading()

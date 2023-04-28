@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.login_app_exarbete.AuthModel
+import com.example.login_app_exarbete.widgets.AppButton
 import com.example.login_app_exarbete.widgets.AppPasswordField
 import com.example.login_app_exarbete.widgets.AppTextField
 import com.example.login_app_exarbete.widgets.CustomTopAppBar
@@ -57,20 +58,9 @@ fun RegisterScreen(navController: NavHostController) {
             AppPasswordField(label = "Password",
                 value = password,
                 onInputChanged = { password = it })
-            Spacer(modifier = Modifier.height(25.dp))
-            Box(modifier = Modifier.padding(horizontal = 20.dp)) {
-                Button(
-                    onClick = {
-                        authModel.open.value = true
-                        authModel.registerUser(mail, password, context, navController)
-                    },
-                    shape = RoundedCornerShape(50.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
-                ) {
-                    Text(text = "Register")
-                }
+            AppButton("Register") {
+                authModel.open.value = true
+                authModel.registerUser(mail, password, context, navController)
             }
             if (openDialog) {
                 DialogBoxLoading()

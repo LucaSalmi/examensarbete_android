@@ -38,7 +38,6 @@ import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.example.login_app_exarbete.models.UserPost
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun UserPostcard(item: UserPost) {
     val imageLink = "http://i.imgur.com/DvpvklR.png"
@@ -72,7 +71,6 @@ fun UserPostcard(item: UserPost) {
                     Text(text = item.userName, fontSize = 8.sp)
                     Text(text = item.createdAt, fontSize = 8.sp)
                 }
-
             }
         }
     }
