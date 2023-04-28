@@ -1,64 +1,74 @@
 package com.example.login_app_exarbete.views
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.os.Build
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.login_app_exarbete.models.UserPost
 import com.example.login_app_exarbete.widgets.CustomTopAppBar
 import com.example.login_app_exarbete.widgets.UserPostcard
-import java.util.Date
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.login_app_exarbete.AuthModel
-import com.example.login_app_exarbete.FirestoreViewModel
-import com.example.login_app_exarbete.Routes
-import com.example.login_app_exarbete.widgets.ImageLoadingAnimation
-import java.time.Instant
+import com.example.login_app_exarbete.extensions.isScrollingUp
+import com.example.login_app_exarbete.router.Routes
+import com.example.login_app_exarbete.view_models.FirestoreViewModel
+import com.example.login_app_exarbete.widgets.HorizontalCenteredRow
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomePage(navController: NavHostController) {
     val firestoreViewModel: FirestoreViewModel = viewModel()
     firestoreViewModel.streamUserPost()
+    val content by firestoreViewModel.postList.observeAsState(initial = emptyList())
+    val listState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
 
 
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate(Routes.CreatePost.route) }) {
-                Icon(Icons.Filled.Create, contentDescription = null)
+            Row(Modifier.fillMaxWidth().padding(bottom = 24.dp), horizontalArrangement = Arrangement.End) {
+                AnimatedVisibility(
+                    visible = !listState.isScrollingUp(),
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    GoToTop {
+                        scope.launch {
+                            listState.scrollToItem(0)
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.width(20.dp))
+                FloatingActionButton(onClick = { navController.navigate(Routes.CreatePost.route) }) {
+                    Icon(Icons.Filled.Create, contentDescription = null)
+                }
             }
+
         },
         topBar = {
             CustomTopAppBar(
@@ -68,22 +78,33 @@ fun HomePage(navController: NavHostController) {
             )
         }
     ) {
-        CreatePostList()
+        LazyColumn(
+            contentPadding = PaddingValues(
+                horizontal = 16.dp,
+                vertical = 6.dp,
+            ),
+            state = listState,
+        ) {
+            itemsIndexed(content) { index, item ->
+                UserPostcard(item = item)
+            }
+        }
     }
 }
 
 @Composable
-fun CreatePostList() {
-    val firestoreViewModel: FirestoreViewModel = viewModel()
-    val content by firestoreViewModel.postList.observeAsState(initial = emptyList())
-    LazyColumn(
-        contentPadding = PaddingValues(
-            horizontal = 16.dp,
-            vertical = 6.dp,
-        )
-    ) {
-        items(content) { item ->
-            UserPostcard(item = item)
+fun GoToTop(goToTop: () -> Unit) {
+    FloatingActionButton(
+        onClick = goToTop,
+        ) {
+        HorizontalCenteredRow(Modifier.padding(horizontal = 16.dp)) {
+            Icon(
+                Icons.Filled.ArrowUpward,
+                contentDescription = "go to top"
+            )
+            Text(text = "Back To Top")
         }
     }
+
 }
+

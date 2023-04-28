@@ -71,16 +71,16 @@ class FirestoreViewModel : ViewModel() {
                 Log.w(TAG, "Listen failed.", e)
             }
             if (snapshot != null && !snapshot.isEmpty) {
-                postList.value = UserPost.fromJson(snapshot.documents)
+                var bigList = mutableListOf<UserPost>()
+                repeat(20){
+                     bigList.addAll(UserPost.fromJson(snapshot.documents))
+                }
+                postList.value = bigList
             }
         }
     }
 
-    fun loadMoreItems() {
-        val extraItemsList = mutableListOf<UserPost>()
-        repeat(2) { postList.value?.let { extraItemsList.addAll(it) } }
-        postList.value = extraItemsList
-    }
+
 
 
 }
